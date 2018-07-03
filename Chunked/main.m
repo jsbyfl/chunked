@@ -25,6 +25,12 @@ int main(int argc, const char * argv[]) {
         [target appendString:string_2];
 
         NSLog(@"%@",target);
+        
+        
+        NSString *chunkedString_3 = @"\r\n0\r\n\r\n";
+        NSData *chunkedData_3 = [chunkedString_3 dataUsingEncoding:NSUTF8StringEncoding];
+        NSString *string_3 = [chunkedData_3 getChunkedBodyStringWithIsFirst:NO];
+        NSLog(@"-----[%@]",string_3);
     }
     return 0;
 }

@@ -29,6 +29,9 @@
 ///chunked编码是否接收完毕
 - (BOOL)isChunkedDataReadEnd;
 
+///是否只有结束符
+- (BOOL)isChunkedEndData;
+
 ///获取每一次接收到的chunked编码的bodyString,isFirst=是否为第一次接收数据(YES是,NO否)
 - (NSString *)getChunkedBodyStringWithIsFirst:(BOOL)isFirst;
 

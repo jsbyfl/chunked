@@ -76,8 +76,26 @@
     return NO;
 }
 
+///是否只有结束符
+- (BOOL)isChunkedEndData
+{
+    NSData *data = [self copy];
+    NSString *readDataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSString *endString = @"\r\n0\r\n\r\n";
+    if ([readDataString isEqualToString:endString]) {
+        return YES;
+    }
+    return NO;
+}
+
 - (NSString *)getChunkedBodyStringWithIsFirst:(BOOL)isFirst
 {
+    if (!isFirst) {
+        if ([self isChunkedEndData]) {
+            return @"";
+        }
+    }
+    
     NSData *data = [self copy];
     NSString *readDataString = [[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding];
     NSString *chunkedStr = [readDataString copy];
